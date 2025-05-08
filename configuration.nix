@@ -47,6 +47,7 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     CLUTTER_DEFAULT_FPS = 165;
     __GL_SYNC_DISPLAY_DEVICE = "DP-1";
+    NH_OS_FLAKE = "/etc/nixos";
   };
 
 
