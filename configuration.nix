@@ -33,6 +33,7 @@
   tidal-hifi
   heroic
   winetricks
+  nh
   ];
 
   environment.variables.EDITOR = "vim";

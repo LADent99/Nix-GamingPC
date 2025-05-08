@@ -77,7 +77,13 @@ systemd.services."systemd-suspend" = {
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
+  # nh cleaning enabling
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/etc/nixos";
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
