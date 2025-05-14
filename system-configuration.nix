@@ -17,6 +17,28 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+
+    settings.General = {
+      Experimental = true;
+      Privacy = "device";
+      JustWorksRepairing = "always";
+      Class = "0x000100";
+      FastConnectable = true;
+    };
+  };
+  #services.blueman.enable = true;
+  hardware.xpadneo.enable = true; # Enable the xpadneo driver for Xbox One wireless controllers
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
+    extraModprobeConfig = ''
+      options bluetooth disable_ertm=Y
+    '';
+    # connect xbox controller
+  };
+
 systemd.services."systemd-suspend" = {
     serviceConfig = {
       Environment=''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
@@ -69,6 +91,7 @@ systemd.services."systemd-suspend" = {
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

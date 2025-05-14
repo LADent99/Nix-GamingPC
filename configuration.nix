@@ -34,6 +34,7 @@
   heroic
   winetricks
   nh
+  nixfmt-rfc-style
   ];
 
   environment.variables.EDITOR = "vim";
@@ -48,12 +49,18 @@
     CLUTTER_DEFAULT_FPS = 165;
     __GL_SYNC_DISPLAY_DEVICE = "DP-1";
     NH_OS_FLAKE = "/etc/nixos";
+    KUBECONFIG = "/home/ladent/.kube_configs/home_cluster.yaml";
   };
 
 
 
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
 
