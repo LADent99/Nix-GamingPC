@@ -35,6 +35,7 @@
   winetricks
   nh
   nixfmt-rfc-style
+  kdePackages.partitionmanager
   ];
 
   environment.variables.EDITOR = "vim";
