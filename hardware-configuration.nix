@@ -35,6 +35,11 @@
       fsType = "btrfs";
     };
 
+  fileSystems."/mnt/sn850x" =
+    { device = "/dev/disk/by-uuid/226c499d-e6e3-472c-a1a4-bc3372d9a8bb";
+      fsType = "btrfs";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/107441f8-5cf0-4573-822b-6950437e4788"; }
     ];
