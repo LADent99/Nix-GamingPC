@@ -39,7 +39,13 @@
     # connect xbox controller
   };
 
-systemd.services."systemd-suspend" = {
+  # Allow usb wake from sleep
+  # may not work
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usb", ATTR{power/wakeup}="enabled"
+  '';
+
+  systemd.services."systemd-suspend" = {
     serviceConfig = {
       Environment=''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
     };
