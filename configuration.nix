@@ -36,6 +36,7 @@
   nh
   nixfmt-rfc-style
   kdePackages.partitionmanager
+  audacity
   ];
 
   environment.variables.EDITOR = "vim";
