@@ -23,6 +23,8 @@
   mangohud
   protonup
   protonup-qt
+  protontricks
+  toybox
   bitwarden-desktop
   discord
   bottles
@@ -37,6 +39,7 @@
   nixfmt-rfc-style
   kdePackages.partitionmanager
   audacity
+  mullvad-vpn
   ];
 
   environment.variables.EDITOR = "vim";
