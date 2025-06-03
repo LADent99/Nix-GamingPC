@@ -42,6 +42,7 @@
   mullvad-vpn
   ];
 
+
   environment.variables.EDITOR = "vim";
   
   environment.sessionVariables = {

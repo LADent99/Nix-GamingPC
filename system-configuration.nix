@@ -39,18 +39,6 @@
     # connect xbox controller
   };
 
-  # Allow usb wake from sleep
-  # may not work
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usb", ATTR{power/wakeup}="enabled"
-  '';
-
-  systemd.services."systemd-suspend" = {
-    serviceConfig = {
-      Environment=''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
-    };
-  };
-
   # Enable experimental commands
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -122,6 +110,10 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
+
+  # necessary for VPN
+  networking.iproute2.enable = true;
+  services.mullvad-vpn.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

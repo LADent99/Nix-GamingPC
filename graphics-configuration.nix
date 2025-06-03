@@ -5,6 +5,7 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
 
 
   # Enable the KDE Plasma Desktop Environment.
@@ -21,19 +22,14 @@
     enable = true;
     enable32Bit = true;
   };
-  # hardware.opengl has beed changed to hardware.graphics
 
-  services.xserver.videoDrivers = ["nvidia"];
-  # services.xserver.videoDrivers = ["amdgpu"];
+  # Swing on suspend
+  systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false"; 
 
-  boot.kernelModules = [
-    "nvidia"
-  ];
-  
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = false;
+    # powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
