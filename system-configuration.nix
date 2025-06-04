@@ -63,8 +63,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -114,6 +112,21 @@
   # necessary for VPN
   networking.iproute2.enable = true;
   services.mullvad-vpn.enable = true;
+
+  # printing setup
+  
+  ## Enable CUPS to print documents.
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.cups-brother-hll2350dw ];
+
+  ## IPP auto discovery
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
