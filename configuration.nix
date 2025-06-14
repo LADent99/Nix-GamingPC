@@ -40,6 +40,9 @@
   kdePackages.partitionmanager
   audacity
   mullvad-vpn
+  awscli2
+  vlc
+  libreoffice-qt6-fresh
   ];
 
 
