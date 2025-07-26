@@ -43,6 +43,7 @@
   awscli2
   vlc
   libreoffice-qt6-fresh
+  direnv
   ];
 
 
