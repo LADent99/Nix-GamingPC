@@ -44,6 +44,8 @@
   vlc
   libreoffice-qt6-fresh
   direnv
+  glxinfo
+  qmk
   ];
 
 
