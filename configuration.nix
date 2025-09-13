@@ -46,6 +46,10 @@
   direnv
   glxinfo
   qmk
+  zulu8
+  python312
+  prismlauncher
+  gnumake
   ];
 
 
