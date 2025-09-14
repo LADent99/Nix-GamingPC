@@ -52,7 +52,11 @@
   gnumake
   ];
 
-
+  nix.settings.trusted-users = [
+    "root"
+    "ladent"
+    "@wheel"
+  ];
   environment.variables.EDITOR = "vim";
   
   environment.sessionVariables = {
