@@ -32,7 +32,7 @@
     # powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
     # attempt a downgrade for borderlands 4
     # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
     #   version = "575.64.05";
