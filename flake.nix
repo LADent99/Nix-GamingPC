@@ -1,20 +1,32 @@
 {
-  description = "Gaming PC";
+  description = "Nix Configs";
 
   inputs = {
-    # NixOS official package source, using the nixos-24.11 branch here
+    # NixOS official package source, using unstable 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.LD-NixOS-PC = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
 
-      modules = [
-        # Import the previous configuration.nix we used,
-        # so the old configuration file still takes effect
-        ./configuration.nix
-      ];
+    nixosConfigurations = {
+
+      # Setup Lucas' PC
+      LD-NixOS-PC = let 
+        hostName = "LD-NixOS-PC";
+        specialArgs = {
+          inherit hostName;
+          };
+      in nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
+        system = "x86_64-linux";
+
+        modules = [
+          ./general-config # Import general modules
+          ./nvidia-graphics # Import nvidia graphics
+          ./${hostName} # Import host specific config
+        ];
+
+      };
     };
   };
 }
