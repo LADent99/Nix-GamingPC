@@ -11,7 +11,13 @@
   boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+  security.polkit.enable = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/74fba569-c16e-49b7-a679-861672526532";
