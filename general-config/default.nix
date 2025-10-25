@@ -49,6 +49,9 @@
   streamrip
   alsa-scarlett-gui
   scarlett2
+  obs-studio
+  v4l-utils
+  cameractrls-gtk4 
   ];
 
 
@@ -58,6 +61,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  hardware.mwProCapture.enable = true;
 
   hardware.bluetooth = {
     enable = true;
