@@ -17,7 +17,6 @@
   git
   wget
   mangohud
-  protonup
   protonup-qt
   protontricks
   toybox
@@ -40,7 +39,7 @@
   vlc
   libreoffice-qt6-fresh
   direnv
-  glxinfo
+  mesa-demos 
   qmk
   zulu8
   python312
