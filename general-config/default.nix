@@ -9,30 +9,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Basic Packages for all PC's
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   git
   wget
-  mangohud
-  protonup-qt
-  protontricks
-  toybox
   bitwarden-desktop
   discord
-  bottles
-  lutris
   vscodium
-  calibre
   kubectl
   tidal-hifi
-  heroic
-  winetricks
   nh
   nixfmt-rfc-style
   kdePackages.partitionmanager
-  audacity
   mullvad-vpn
   awscli2
   vlc
@@ -42,16 +31,12 @@
   qmk
   zulu8
   python312
-  prismlauncher
   gnumake
-  streamrip
-  alsa-scarlett-gui
-  scarlett2
   v4l-utils
   cameractrls-gtk4 
-  monero-gui
-  krita
-  gimp
+  ffmpeg
+  lshw
+  usbutils
   ];
 
 
@@ -76,6 +61,7 @@
       FastConnectable = true;
     };
   };
+
   #services.blueman.enable = true;
   hardware.xpadneo.enable = true; # Enable the xpadneo driver for Xbox One wireless controllers
   boot = {
@@ -88,6 +74,7 @@
 
   # Enable experimental commands
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -131,44 +118,11 @@
     flake = "/etc/nixos";
   };
 
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
-
   programs.xwayland.enable = true;
 
-  programs.obs-studio = {
-    enable = true;
-    enableVirtualCamera = true;
-    # optional Nvidia hardware acceleration
-    package = (
-      pkgs.obs-studio.override {
-        cudaSupport = true;
-      }
-    # Force x11 for browser dock support
-    ).overrideAttrs (oldAttrs: {
-    postInstall = (oldAttrs.postInstall or "") + ''
-        wrapProgram $out/bin/obs \
-          --set GDK_BACKEND x11 --set QT_QPA_PLATFORM xcb
-        '';
-      }
-    );
 
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-backgroundremoval
-      obs-pipewire-audio-capture
-      obs-gstreamer
-      obs-vkcapture
-      obs-multi-rtmp
-    ];
-  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

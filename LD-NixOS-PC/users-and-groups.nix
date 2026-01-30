@@ -35,6 +35,7 @@
     __GL_SYNC_DISPLAY_DEVICE = "DP-1";
     NH_OS_FLAKE = "/etc/nixos";
     KUBECONFIG = "/home/ladent/.kube_configs/home_cluster.yaml";
+    SDL_JOYSTICK_HIDAPI = "0";
   };
 
 }

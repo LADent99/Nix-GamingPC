@@ -30,7 +30,11 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+
+  };
+
 
   # necessary for VPN
   networking.iproute2.enable = true;
@@ -45,10 +49,87 @@
   ## IPP auto discovery
   services.avahi = {
     enable = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
     nssmdns4 = true;
     openFirewall = true;
   };
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+    package = pkgs.sunshine.override { cudaSupport = true; };
+  };
+  
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    # optional Nvidia hardware acceleration
+    package = (
+      pkgs.obs-studio.override {
+        cudaSupport = true;
+      }
+    # Force x11 for browser dock support
+    ).overrideAttrs (oldAttrs: {
+    postInstall = (oldAttrs.postInstall or "") + ''
+        wrapProgram $out/bin/obs \
+          --set GDK_BACKEND x11 --set QT_QPA_PLATFORM xcb
+        '';
+      }
+    );
 
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-gstreamer
+      obs-vkcapture
+      obs-multi-rtmp
+      obs-source-record
+      obs-scale-to-sound
+      obs-move-transition
+      obs-livesplit-one
+    ];
+  };
+  
+  # More specific packages
+  environment.systemPackages = with pkgs; [
+  mangohud
+  protonup-qt
+  protontricks
+  bottles
+  lutris
+  vscodium
+  calibre
+  heroic
+  winetricks
+  audacity
+  prismlauncher
+  streamrip
+  alsa-scarlett-gui
+  scarlett2
+  v4l-utils
+  cameractrls-gtk4 
+  monero-gui
+  krita
+  gimp
+  shotcut
+  ffmpeg
+  lshw
+  usbutils
+  # sunshine
+  ];
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
 
 }
