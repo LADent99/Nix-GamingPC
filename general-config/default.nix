@@ -123,8 +123,6 @@
   programs.xwayland.enable = true;
 
 
-  programs.xwayland.enable = true;
-
   programs.obs-studio = {
     enable = true;
     enableVirtualCamera = true;
