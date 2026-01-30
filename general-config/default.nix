@@ -123,6 +123,34 @@
   programs.xwayland.enable = true;
 
 
+  programs.xwayland.enable = true;
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    # optional Nvidia hardware acceleration
+    package = (
+      pkgs.obs-studio.override {
+        cudaSupport = true;
+      }
+    # Force x11 for browser dock support
+    ).overrideAttrs (oldAttrs: {
+    postInstall = (oldAttrs.postInstall or "") + ''
+        wrapProgram $out/bin/obs \
+          --set GDK_BACKEND x11 --set QT_QPA_PLATFORM xcb
+        '';
+      }
+    );
+
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-gstreamer
+      obs-vkcapture
+      obs-multi-rtmp
+    ];
+  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
