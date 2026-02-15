@@ -108,7 +108,21 @@
   heroic
   winetricks
   audacity
-  prismlauncher
+  (prismlauncher.override {
+    additionalLibs = [ 
+      libxtst
+      libxt
+      libxkbcommon
+      libXinerama
+    ];
+    jdks = [
+      graalvmPackages.graalvm-ce
+      zulu8
+      zulu17
+      zulu
+      temurin-jre-bin
+    ];
+  })
   streamrip
   alsa-scarlett-gui
   scarlett2
@@ -121,6 +135,7 @@
   ffmpeg
   lshw
   usbutils
+  waywall
   # sunshine
   ];
 

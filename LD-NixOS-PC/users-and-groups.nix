@@ -32,7 +32,7 @@
     NV_PRIME_RENDER_OFFLOAD_PROVIDER= "NVIDIA-G0";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     CLUTTER_DEFAULT_FPS = 165;
-    __GL_SYNC_DISPLAY_DEVICE = "DP-1";
+    __GL_SYNC_DISPLAY_DEVICE = "HDMI-0";
     NH_OS_FLAKE = "/etc/nixos";
     KUBECONFIG = "/home/ladent/.kube_configs/home_cluster.yaml";
     SDL_JOYSTICK_HIDAPI = "0";

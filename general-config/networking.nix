@@ -9,8 +9,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  hardware.mwProCapture.enable = true;
   hardware.enableAllFirmware = true;
+  
+  # Seems to be for capture cards, disabling 
+  # hardware.mwProCapture.enable = true;
 
   # Bluetooth Support
   hardware.bluetooth = {
