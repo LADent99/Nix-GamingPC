@@ -36,6 +36,8 @@
     NH_OS_FLAKE = "/etc/nixos";
     KUBECONFIG = "/home/ladent/.kube_configs/home_cluster.yaml";
     SDL_JOYSTICK_HIDAPI = "0";
+    QT_QPA_PLATFORM = "wayland";
+    GDK_BACKEND = "wayland";
   };
 
 }

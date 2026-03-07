@@ -114,6 +114,7 @@
       libxt
       libxkbcommon
       libXinerama
+      libxcb
     ];
     jdks = [
       graalvmPackages.graalvm-ce
@@ -136,8 +137,13 @@
   lshw
   usbutils
   waywall
+  glfw3-minecraft
+  piper
   # sunshine
   ];
+
+  # mouse DPI setings
+  services.ratbagd.enable = true;
 
   programs.steam = {
     enable = true;
