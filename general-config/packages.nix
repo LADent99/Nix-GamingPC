@@ -26,8 +26,9 @@
   direnv
   mesa-demos 
   qmk
-  zulu8
-  python312
+  # zulu8
+  zulu17
+  # python312
   gnumake
   v4l-utils
   cameractrls-gtk4 
