@@ -103,7 +103,6 @@
   protontricks
   bottles
   lutris
-  vscodium
   calibre
   heroic
   winetricks
@@ -124,6 +123,34 @@
       temurin-jre-bin
     ];
   })
+  (vscode-with-extensions.override {
+    vscode = vscodium;
+    vscodeExtensions = with vscode-extensions; [
+      bbenoist.nix
+      ms-python.python
+      ms-azuretools.vscode-docker
+      ms-vscode-remote.remote-ssh
+      continue.continue
+      vscodevim.vim
+      james-yu.latex-workshop
+      golang.go
+      mkhl.direnv
+      hashicorp.hcl
+    ];
+  })
+  (texliveMedium.withPackages (
+    ps: with ps;
+    [
+      ling-macros
+      tree-dvips
+      moderncv
+      geometry
+      fontawesome5
+    ]
+  ))
+  ollama-cuda
+  claude-code
+  llama-cpp
   streamrip
   alsa-scarlett-gui
   scarlett2
@@ -139,11 +166,22 @@
   waywall
   glfw3-minecraft
   piper
+  zip
+  unzip
+  r2modman
+
   # sunshine
   ];
 
   # mouse DPI setings
   services.ratbagd.enable = true;
+
+  # configure docker
+  virtualisation.docker.rootless = {
+    enable = true; 
+    setSocketVariable = true;
+  };
+  virtualisation.docker.storageDriver = "btrfs";
 
   programs.steam = {
     enable = true;
@@ -152,5 +190,6 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
+  programs.direnv.enable = true;
 
 }
