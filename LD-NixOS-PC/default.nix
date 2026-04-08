@@ -1,4 +1,4 @@
-{ config, pkgs, ollama-cache, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -6,5 +6,6 @@
       ./hardware-configuration.nix
       ./users-and-groups.nix
       ./system-configuration.nix
+      ./ollama-overlay.nix
     ];
 }

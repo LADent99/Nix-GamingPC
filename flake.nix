@@ -18,7 +18,6 @@
 
   outputs = { self, nixpkgs, ollama-cache, ... }@inputs: 
   
-      
   {
 
     nixosConfigurations = {
@@ -38,7 +37,6 @@
         modules = [
           ./general-config # Import general modules
           ./nvidia-graphics # Import nvidia graphics
-          ./modules/ollama-overlay.nix
           ./${hostName} # Import host specific config
         ];
 
