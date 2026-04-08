@@ -33,6 +33,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  programs.ssh = {
+    startAgent = true;
+    enableAskPassword = true;
+  };
+  environment.variables = {
+    SSH_ASKPASS_REQUIRE = "prefer";
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

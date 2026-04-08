@@ -148,7 +148,7 @@
       fontawesome5
     ]
   ))
-  ollama-cuda
+  ollama-cuda # this is cached by my cachix and replaced with an overlay
   claude-code
   llama-cpp
   streamrip
@@ -169,6 +169,7 @@
   zip
   unzip
   r2modman
+  kubernetes-helm
 
   # sunshine
   ];
