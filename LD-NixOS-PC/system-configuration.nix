@@ -146,6 +146,12 @@
       moderncv
       geometry
       fontawesome5
+      xcharter
+      fontaxes
+      enumitem
+      hyperref
+      titlesec
+
     ]
   ))
   ollama-cuda # this is cached by my cachix and replaced with an overlay
@@ -170,7 +176,7 @@
   unzip
   r2modman
   kubernetes-helm
-
+  binutils
   # sunshine
   ];
 

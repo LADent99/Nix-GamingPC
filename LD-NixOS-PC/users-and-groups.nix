@@ -9,7 +9,8 @@
   users.users.ladent = {
     isNormalUser = true;
     description = "Lucas";
-    extraGroups = [ "networkmanager" "wheel" "games"];
+    # plugdev is for waverforms access
+    extraGroups = [ "networkmanager" "wheel" "games" "plugdev"];
     packages = with pkgs; [
       kdePackages.kate
       thunderbird

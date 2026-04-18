@@ -13,3 +13,14 @@
     ```
     nh os switch -u
     ```
+
+
+* Useful snippet for finding required libs for a deb package
+```
+nix-shell -p binutils curl dpkg --run bash << 'EOF'
+  mkdir -p /tmp/deb-inspect && cd /tmp/deb-inspect
+  curl -L -o package.deb "https://files.digilent.com/Software/Waveforms/3.25.1/digilent.waveforms_3.25.1_amd64.deb"
+  dpkg-deb -x package.deb .
+  find . -type f -executable | xargs -I{} readelf -d {} 2>/dev/null | grep NEEDED | sort -u
+EOF
+```
