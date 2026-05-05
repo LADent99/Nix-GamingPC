@@ -10,7 +10,7 @@
     isNormalUser = true;
     description = "Lucas";
     # plugdev is for waverforms access
-    extraGroups = [ "networkmanager" "wheel" "games" "plugdev"];
+    extraGroups = [ "networkmanager" "wheel" "games" "plugdev" "dialout" "uucp" "docker"];
     packages = with pkgs; [
       kdePackages.kate
       thunderbird

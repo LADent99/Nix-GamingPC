@@ -101,8 +101,9 @@
   mangohud
   protonup-qt
   protontricks
-  bottles
+  # bottles
   lutris
+  # (openldap.overrideAttrs (old: { doCheck = false; doInstallCheck = false;  }))
   calibre
   heroic
   winetricks
@@ -136,6 +137,9 @@
       golang.go
       mkhl.direnv
       hashicorp.hcl
+      ms-python.black-formatter
+      esbenp.prettier-vscode
+      dbaeumer.vscode-eslint
     ];
   })
   (texliveMedium.withPackages (
@@ -184,11 +188,20 @@
   services.ratbagd.enable = true;
 
   # configure docker
-  virtualisation.docker.rootless = {
-    enable = true; 
-    setSocketVariable = true;
+  virtualisation.docker = {
+    enable = true;
+    # Set up resource limits
+    storageDriver = "btrfs";
+    daemon.settings = {
+      experimental = true;
+      default-address-pools = [
+        {
+          base = "172.30.0.0/16";
+          size = 24;
+        }
+      ];
+    };
   };
-  virtualisation.docker.storageDriver = "btrfs";
 
   programs.steam = {
     enable = true;

@@ -22,7 +22,14 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/74fba569-c16e-49b7-a679-861672526532";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
+      options = [ "subvol=@" "compress=zstd" "defaults" ];
+    };
+  
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/c8a988dc-a718-47ac-809d-a9c711a4d535";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "compress=zstd" "defaults" ];
     };
 
   fileSystems."/boot" =
@@ -32,19 +39,29 @@
     };
 
   fileSystems."/mnt/kc3000" =
-    { device = "/dev/disk/by-uuid/2d546bfd-f5a3-43f7-a1f7-fb11bdd16d34";
-      fsType = "btrfs";
-    };
+   { device = "/dev/disk/by-uuid/76e10bda-aeb0-4c0c-a183-cdf6a6a9441e";
+     fsType = "btrfs";
+     options = [ "compress=zstd" "defaults" ];                                                                                                                                                                                                                                                                                          
+   };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/3b05bb1d-6aa2-4517-86ac-939d28db7dc0";
       fsType = "btrfs";
+      options = [ "compress=zstd" "defaults" ];                                                                                                                                                                                                                                                                                          
     };
 
   fileSystems."/mnt/sn850x" =
     { device = "/dev/disk/by-uuid/226c499d-e6e3-472c-a1a4-bc3372d9a8bb";
       fsType = "btrfs";
+      options = [ "compress=zstd" "defaults" ];                                                                                                                                                                                                                                                                                          
     };
+
+  fileSystems."/mnt/sn750" = 
+    {                                                                                                                                                                                                                                                                                                         
+      device = "/dev/disk/by-uuid/e8b4207b-0a1c-422b-b2f7-569419fb0b94";                                                                                                                                                                                                                                                             
+      fsType = "btrfs";                                                                                                                                                                                                                                                                                                                  
+      options = [ "compress=zstd" "defaults" ];                                                                                                                                                                                                                                                                                          
+    }; 
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/107441f8-5cf0-4573-822b-6950437e4788"; }
