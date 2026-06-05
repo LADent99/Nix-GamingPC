@@ -4,6 +4,22 @@
 
 {
 
+  # Pinned to 7.0.6 — MT7922 BT broken by regression in 7.0.7+
+  # https://discourse.nixos.org/t/bluetooth-stopped-working-due-to-linux-kernel-bug/77701/6
+  # Track fix: https://nixpkgs-tracker.ocfox.me/?pr=521297
+  # boot.kernelPackages = pkgs.linuxPackagesFor (
+  #   pkgs.linux_latest.override {
+  #     argsOverride = rec {
+  #       version = "7.0.6";
+  #       modDirVersion = "7.0.6";
+  #       src = pkgs.fetchurl {
+  #         url = "mirror://kernel/linux/kernel/v7.x/linux-${version}.tar.xz";
+  #         sha256 = "08vm18wx6399phzgr3wz94yga3ab4fyca79445ygvbspm904996b";
+  #       };
+  #     };
+  #   }
+  # );
+
   networking.hostName = "LD-NixOS-PC"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   
@@ -129,9 +145,10 @@
     vscodeExtensions = with vscode-extensions; [
       bbenoist.nix
       ms-python.python
+      ms-python.pylint
+      anthropic.claude-code
       ms-azuretools.vscode-docker
       ms-vscode-remote.remote-ssh
-      continue.continue
       vscodevim.vim
       james-yu.latex-workshop
       golang.go
@@ -182,6 +199,7 @@
   kubernetes-helm
   binutils
   # sunshine
+  zoom-us
   ];
 
   # mouse DPI setings
