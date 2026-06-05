@@ -12,7 +12,7 @@
   };
   inputs = {
     # NixOS official package source, using unstable 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     ollama-cache.url = "github:ladent99/ollama-binary-caching";
   };
 

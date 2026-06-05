@@ -10,6 +10,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
   hardware.enableAllFirmware = true;
+  hardware.firmware = [ pkgs.linux-firmware ];
   
   # Seems to be for capture cards, disabling 
   # hardware.mwProCapture.enable = true;

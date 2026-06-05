@@ -7,5 +7,6 @@
       ./users-and-groups.nix
       ./system-configuration.nix
       ./ollama-overlay.nix
+      ./manual-packages
     ];
 }
