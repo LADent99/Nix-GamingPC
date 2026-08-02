@@ -5,9 +5,11 @@
     ## Caching for long running binary builds
     extra-substituters = [
       "https://ladent.cachix.org"
+      "https://cache.nixos-cuda.org"
     ];
     extra-trusted-public-keys = [
       "ladent.cachix.org-1:iJiLXkTbnPWmZ0OWqt9M4zFipIRdStMR1fF1eJpsI8k="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
   };
   inputs = {

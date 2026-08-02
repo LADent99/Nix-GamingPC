@@ -1,12 +1,25 @@
-{ config, pkgs, lib, stdenv, fetchurl, autoPatchelfHook, ... }:
+{ config, pkgs, lib, stdenv, requireFile, autoPatchelfHook, ... }:
 
 stdenv.mkDerivation rec {
   pname   = "digilent-adept2-runtime";
   version = "2.30.1";
-  src = fetchurl {
-    url    = "https://files.digilent.com/Software/Adept2%20Runtime/${version}/digilent.adept.runtime_${version}_amd64.deb";
-    # Run `nix hash convert --hash-algo sha256 --to sri $(nix-prefetch-url <url>)` to verify/update this hash
-    hash   = "sha256-5eUdJkDC/zTvO0NvO983g4EgsVFg1z37q4LpB3O2s3I=";
+  # LD Note 07.08.26: This started erroring out with 403s
+  # src = fetchurl {
+  #   url    = "https://files.digilent.com/Software/Adept2%20Runtime/${version}/digilent.adept.runtime_${version}_amd64.deb";
+  #   # Run `nix hash convert --hash-algo sha256 --to sri $(nix-prefetch-url <url>)` to verify/update this hash
+  #   hash   = "sha256-5eUdJkDC/zTvO0NvO983g4EgsVFg1z37q4LpB3O2s3I=";
+  #   curlOptsList = [ "-v" ];
+  # };
+  # src = "./LD-NixOS-PC/manual-packages/digilent.adept.runtime_2.30.1_amd64.deb";
+  src = requireFile {
+    name = "digilent.adept.runtime_2.30.1_amd64.deb";
+    sha256 = "e5e51d2640c2ff34ef3b436f3bdf37838120b15160d73dfbab82e90773b6b372"; # same hash you already have
+    message = ''
+      Digilent's WAF blocks this build's network path.
+      Download manually and add it to the store:
+        https://files.digilent.com/Software/Adept2%20Runtime/2.30.1/digilent.adept.runtime_2.30.1_amd64.deb
+        nix-store --add-fixed sha256 ./digilent.adept.runtime_2.30.1_amd64.deb
+    '';
   };
 
   nativeBuildInputs = with pkgs; [

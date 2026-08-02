@@ -20,6 +20,17 @@
   #   }
   # );
 
+  # In your configuration.nix or a separate module
+  # boot.kernelPatches = [
+  #   {
+  #     name = "barrot-br8554-bluetooth-fix";
+  #     patch = builtins.fetchurl {
+  #       url = "https://raw.githubusercontent.com/nwrafael/CM748-ugreen-bluetooth-adapter-patch-linux/main/0001-bluetooth-disable-read-local-ext-features.patch";
+  #       sha256 = "0x91iw2l9ivpdcgrgnirlpy1cibv6ph67nb257g29l27rq0iicp3";
+  #     };
+  #   }
+  # ];
+
   networking.hostName = "LD-NixOS-PC"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   
@@ -176,8 +187,11 @@
     ]
   ))
   ollama-cuda # this is cached by my cachix and replaced with an overlay
+  (ollama.override {
+    acceleration = "cuda";
+  })
   claude-code
-  llama-cpp
+  qwen-code
   streamrip
   alsa-scarlett-gui
   scarlett2

@@ -1,13 +1,25 @@
-{ config, pkgs, lib, stdenv, fetchurl, autoPatchelfHook, adept2-runtime, ... }:
+{ config, pkgs, lib, stdenv, requireFile, autoPatchelfHook, adept2-runtime, ... }:
 
 stdenv.mkDerivation rec {
   pname   = "digilent-waveforms";
   version = "3.25.1";
 
-  src = fetchurl {
-    url  = "https://files.digilent.com/Software/Waveforms/${version}/digilent.waveforms_${version}_amd64.deb";
-    # Run `nix hash convert --hash-algo sha256 --to sri $(nix-prefetch-url https://files.digilent.com/Software/Waveforms/${version}/digilent.waveforms_${version}_amd64.deb)` to verify/update this hash
-    hash = "sha256-0peaq3JskgKkihxdKzFFMVExccC2L6Lyou3NKSAnJ9M="; # <-- replace
+  # LD Note 07.08.26: This started erroring out with 403s
+  # src = fetchurl {
+  #   url  = "https://files.digilent.com/Software/Waveforms/${version}/digilent.waveforms_${version}_amd64.deb";
+  #   # Run `nix hash convert --hash-algo sha256 --to sri $(nix-prefetch-url https://files.digilent.com/Software/Waveforms/${version}/digilent.waveforms_${version}_amd64.deb)` to verify/update this hash
+  #   hash = "sha256-0peaq3JskgKkihxdKzFFMVExccC2L6Lyou3NKSAnJ9M="; # <-- replace
+  #   curlOptsList = [ "-v" ];
+  # };
+  src = requireFile {
+    name = "digilent.waveforms_3.25.1_amd64.deb";
+    sha256 = "d2979aab726c9202a48a1c5d2b314531513171c0b62fa2f2a2edcd29202727d3"; # same hash you already have
+    message = ''
+      Digilent's WAF blocks this build's network path.
+      Download manually and add it to the store:
+        https://files.digilent.com/Software/Waveforms/3.25.1/digilent.waveforms_3.25.1_amd64.deb
+        nix-store --add-fixed sha256 ./digilent.waveforms_3.25.1_amd64.deb
+    '';
   };
 
   nativeBuildInputs = with pkgs; [
