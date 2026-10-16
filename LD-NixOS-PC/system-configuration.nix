@@ -33,7 +33,7 @@
 
   networking.hostName = "LD-NixOS-PC"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  
+
   # Set your time zone.
   time.timeZone = "America/Indiana/Indianapolis";
 
@@ -41,7 +41,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -69,7 +69,7 @@
   services.mullvad-vpn.enable = true;
 
   # printing setup
-  
+
   ## Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.cups-brother-hll2350dw ];
@@ -92,7 +92,7 @@
     openFirewall = true;
     package = pkgs.sunshine.override { cudaSupport = true; };
   };
-  
+
   programs.obs-studio = {
     enable = true;
     enableVirtualCamera = true;
@@ -123,7 +123,7 @@
       obs-livesplit-one
     ];
   };
-  
+
   # More specific packages
   environment.systemPackages = with pkgs; [
   mangohud
@@ -138,7 +138,7 @@
   winetricks
   audacity
   (prismlauncher.override {
-    additionalLibs = [ 
+    additionalLibs = [
       libxtst
       libxt
       libxkbcommon
@@ -206,7 +206,7 @@
   alsa-scarlett-gui
   scarlett2
   v4l-utils
-  cameractrls-gtk4 
+  cameractrls-gtk4
   monero-gui
   krita
   gimp
