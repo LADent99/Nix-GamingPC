@@ -22,13 +22,12 @@
   mullvad-vpn
   awscli2
   vlc
-  libreoffice-qt6-fresh
+  libreoffice-qt-stable
   direnv
   mesa-demos 
   qmk
   # zulu8
   zulu17
-  # python312
   gnumake
   v4l-utils
   cameractrls-gtk4 

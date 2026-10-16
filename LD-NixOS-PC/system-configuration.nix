@@ -54,11 +54,12 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 8080 8081 ];
+  # networking.firewall.allowedUDPPorts = [ 8080 8081 ];
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
+    interfaces."enp12s0".allowedTCPPorts = [ 8080 8081 ];
 
   };
 
@@ -118,7 +119,7 @@
       obs-multi-rtmp
       obs-source-record
       obs-scale-to-sound
-      obs-move-transition
+      # obs-move-transition
       obs-livesplit-one
     ];
   };
@@ -130,6 +131,7 @@
   protontricks
   # bottles
   lutris
+  zed-editor
   # (openldap.overrideAttrs (old: { doCheck = false; doInstallCheck = false;  }))
   calibre
   heroic
@@ -151,12 +153,21 @@
       temurin-jre-bin
     ];
   })
+  python314
+  poetry
+  pyenv
+  basedpyright
+  teams-for-linux
   (vscode-with-extensions.override {
     vscode = vscodium;
     vscodeExtensions = with vscode-extensions; [
+      mechatroner.rainbow-csv
       bbenoist.nix
       ms-python.python
+      detachhead.basedpyright
+      ms-python.black-formatter
       ms-python.pylint
+      ms-python.debugpy
       anthropic.claude-code
       ms-azuretools.vscode-docker
       ms-vscode-remote.remote-ssh
@@ -165,7 +176,6 @@
       golang.go
       mkhl.direnv
       hashicorp.hcl
-      ms-python.black-formatter
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
     ];
@@ -214,6 +224,7 @@
   binutils
   # sunshine
   zoom-us
+  motion
   ];
 
   # mouse DPI setings
