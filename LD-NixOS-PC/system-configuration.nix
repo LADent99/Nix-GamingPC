@@ -20,9 +20,20 @@
   #   }
   # );
 
+  # In your configuration.nix or a separate module
+  # boot.kernelPatches = [
+  #   {
+  #     name = "barrot-br8554-bluetooth-fix";
+  #     patch = builtins.fetchurl {
+  #       url = "https://raw.githubusercontent.com/nwrafael/CM748-ugreen-bluetooth-adapter-patch-linux/main/0001-bluetooth-disable-read-local-ext-features.patch";
+  #       sha256 = "0x91iw2l9ivpdcgrgnirlpy1cibv6ph67nb257g29l27rq0iicp3";
+  #     };
+  #   }
+  # ];
+
   networking.hostName = "LD-NixOS-PC"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  
+
   # Set your time zone.
   time.timeZone = "America/Indiana/Indianapolis";
 
@@ -30,7 +41,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -43,11 +54,12 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 8080 8081 ];
+  # networking.firewall.allowedUDPPorts = [ 8080 8081 ];
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
+    interfaces."enp12s0".allowedTCPPorts = [ 8080 8081 ];
 
   };
 
@@ -57,7 +69,7 @@
   services.mullvad-vpn.enable = true;
 
   # printing setup
-  
+
   ## Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.cups-brother-hll2350dw ];
@@ -80,7 +92,7 @@
     openFirewall = true;
     package = pkgs.sunshine.override { cudaSupport = true; };
   };
-  
+
   programs.obs-studio = {
     enable = true;
     enableVirtualCamera = true;
@@ -107,11 +119,11 @@
       obs-multi-rtmp
       obs-source-record
       obs-scale-to-sound
-      obs-move-transition
+      # obs-move-transition
       obs-livesplit-one
     ];
   };
-  
+
   # More specific packages
   environment.systemPackages = with pkgs; [
   mangohud
@@ -119,13 +131,14 @@
   protontricks
   # bottles
   lutris
+  zed-editor
   # (openldap.overrideAttrs (old: { doCheck = false; doInstallCheck = false;  }))
   calibre
   heroic
   winetricks
   audacity
   (prismlauncher.override {
-    additionalLibs = [ 
+    additionalLibs = [
       libxtst
       libxt
       libxkbcommon
@@ -140,12 +153,21 @@
       temurin-jre-bin
     ];
   })
+  python314
+  poetry
+  pyenv
+  basedpyright
+  teams-for-linux
   (vscode-with-extensions.override {
     vscode = vscodium;
     vscodeExtensions = with vscode-extensions; [
+      mechatroner.rainbow-csv
       bbenoist.nix
       ms-python.python
+      detachhead.basedpyright
+      ms-python.black-formatter
       ms-python.pylint
+      ms-python.debugpy
       anthropic.claude-code
       ms-azuretools.vscode-docker
       ms-vscode-remote.remote-ssh
@@ -154,7 +176,6 @@
       golang.go
       mkhl.direnv
       hashicorp.hcl
-      ms-python.black-formatter
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
     ];
@@ -176,13 +197,16 @@
     ]
   ))
   ollama-cuda # this is cached by my cachix and replaced with an overlay
+  (ollama.override {
+    acceleration = "cuda";
+  })
   claude-code
-  llama-cpp
+  qwen-code
   streamrip
   alsa-scarlett-gui
   scarlett2
   v4l-utils
-  cameractrls-gtk4 
+  cameractrls-gtk4
   monero-gui
   krita
   gimp
@@ -200,6 +224,7 @@
   binutils
   # sunshine
   zoom-us
+  motion
   ];
 
   # mouse DPI setings

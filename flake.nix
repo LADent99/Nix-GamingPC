@@ -4,19 +4,21 @@
   nixConfig = {
     ## Caching for long running binary builds
     extra-substituters = [
-      "https://ladent.cachix.org"
+      # "https://ladent.cachix.org"
+      "https://cache.nixos-cuda.org"
     ];
     extra-trusted-public-keys = [
-      "ladent.cachix.org-1:iJiLXkTbnPWmZ0OWqt9M4zFipIRdStMR1fF1eJpsI8k="
+      # "ladent.cachix.org-1:iJiLXkTbnPWmZ0OWqt9M4zFipIRdStMR1fF1eJpsI8k="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
   };
   inputs = {
     # NixOS official package source, using unstable 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    ollama-cache.url = "github:ladent99/ollama-binary-caching";
+    # ollama-cache.url = "github:ladent99/ollama-binary-caching";
   };
 
-  outputs = { self, nixpkgs, ollama-cache, ... }@inputs: 
+  outputs = { self, nixpkgs, ... }@inputs: 
   
   {
 
@@ -28,7 +30,7 @@
         system = "x86_64-linux";
         specialArgs = {
           inherit hostName;
-          inherit ollama-cache;
+          # inherit ollama-cache;
           };
 
       in nixpkgs.lib.nixosSystem {
