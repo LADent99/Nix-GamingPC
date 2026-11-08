@@ -2,9 +2,12 @@
 
 { config, pkgs, ... }:
 {
-  
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.problems.handlers = {
+    "gtk+".broken = "warn"; # or "ignore"
+  };
 
   # Basic Packages for all PC's
   environment.systemPackages = with pkgs; [
@@ -17,25 +20,25 @@
   kubectl
   tidal-hifi
   nh
-  nixfmt 
+  nixfmt
   kdePackages.partitionmanager
   mullvad-vpn
   awscli2
   vlc
   libreoffice-qt-stable
   direnv
-  mesa-demos 
+  mesa-demos
   qmk
   # zulu8
   zulu17
   gnumake
   v4l-utils
-  cameractrls-gtk4 
+  cameractrls-gtk4
   ffmpeg
   lshw
   usbutils
   ];
-  
+
   # nh cleaning enabling
   programs.nh = {
     enable = true;

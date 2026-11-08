@@ -13,19 +13,19 @@
     ];
   };
   inputs = {
-    # NixOS official package source, using unstable 
+    # NixOS official package source, using unstable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # ollama-cache.url = "github:ladent99/ollama-binary-caching";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
-  
+  outputs = { self, nixpkgs, ... }@inputs:
+
   {
 
     nixosConfigurations = {
 
       # Setup Lucas' PC
-      LD-NixOS-PC = let 
+      LD-NixOS-PC = let
         hostName = "LD-NixOS-PC";
         system = "x86_64-linux";
         specialArgs = {

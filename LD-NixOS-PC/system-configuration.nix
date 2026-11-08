@@ -77,10 +77,6 @@
   ## IPP auto discovery
   services.avahi = {
     enable = true;
-    publish = {
-      enable = true;
-      userServices = true;
-    };
     nssmdns4 = true;
     openFirewall = true;
   };
